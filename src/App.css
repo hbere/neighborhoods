@@ -15,8 +15,7 @@ h1, h2 {
 }
 
 ul {
-  list-style: none;
-  padding-left: 0;
+  padding-left: 15px;
   font-size: small;
 }
 
@@ -24,20 +23,10 @@ li {
   margin-bottom: 5px;
 }
 
-button {
-  width: 100%;
-  text-align: left;
-}
-
-button:hover {
-  background-color: gray;
-  cursor: pointer;
-}
-
 #App {
   height: calc(450px + 3em);
   display: grid;
-  grid-template-rows: 18em 1fr;
+  grid-template-rows: 17em 1fr;
 }
 
 #map_menu {

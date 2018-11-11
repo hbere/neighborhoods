@@ -9,10 +9,12 @@ class Menu extends Component {
         return (
             <menu id='map_menu'>
                 <h2>Menu</h2>
+                <label for="search">Search: </label>
+                <input role='search' name='places search' placeholder='Philadelphia City Hall'></input>
                 <ul role='menu' aria-hidden='false' id='map_menu_list'>
                     {this.props.locations.map(loc => (
                         <li key={loc.place_id}>
-                            <button>{loc.place}</button>
+                            {loc.place}
                         </li>
                     ))}
                 </ul>
