@@ -94,7 +94,7 @@ class App extends Component {
         let marker = new google.maps.Marker({
           position: loc,
           map: this.map,
-          title: "First marker"
+          title: loc.place
         });
         this.markers.push(marker);
 
