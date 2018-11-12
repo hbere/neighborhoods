@@ -9,13 +9,21 @@ class Menu extends Component {
         return (
             <menu id='map_menu'>
                 <h2>Explore the city</h2>
-                <label for="place_select">Choose from the dropdown or list below: </label>
-                <select role='search' aria-hidden='false' id='place_select'>
+                <label htmlFor="place_select">Choose from the dropdown or list below: </label>
+                <select role='search'
+                    id='place_select'
+                    onChange={(event) => this.props.onPlaceSelect(event.target.value)}
+                    aria-hidden='false'
+                >
                     <option value='(select a place)'>
                         (select a place)
                     </option>
                     {this.props.locations.map(loc => (
-                        <option key={loc.place_id} value={loc.place_id} taborder='0'>
+                        <option
+                            key={loc.place_id}
+                            value={loc.place_id}
+                            taborder='0'
+                        >
                             {loc.place}
                         </option>
                     ))}
@@ -23,7 +31,13 @@ class Menu extends Component {
                 <ul role='menu' aria-hidden='false' id='map_menu_list'>
                     {this.props.locations.map(loc => (
                         <li key={loc.place_id}>
-                            <button class='map_menu_item'>{loc.place}</button>
+                            <button
+                                value={loc.place_id}
+                                onClick={(event) => this.props.onPlaceSelect(event.target.value)}
+                                className='map_menu_item'
+                            >
+                                {loc.place}
+                            </button>
                         </li>
                     ))}
                 </ul>

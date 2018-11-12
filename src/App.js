@@ -65,6 +65,13 @@ class App extends Component {
     ]
   }
 
+  // TODO Write function here for updating marker upon selection on map or menu
+  updateMarker(place_id) {
+    // console.log(`Event logged: ${event}`);
+    // console.log(`Place logged: ${place_id}`);
+    console.log(place_id);
+  }
+
   render() {
     return (
       <div id='Content'>
@@ -74,9 +81,15 @@ class App extends Component {
         <div id='App'>
           <Menu
             locations={this.state.locations}
+            onPlaceSelect={(place_id, event) => {
+              this.updateMarker(place_id, event)
+            }}
           />
           <Map
             locations={this.state.locations}
+            onPlaceSelect={(place_id) => {
+              this.updateMarker(place_id)
+            }}
           />
         </div>
       </div>
