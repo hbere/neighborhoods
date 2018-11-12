@@ -4,6 +4,9 @@ import Menu from './DivMenu.js';
 import Map from './DivMap.js';
 import { load_google_maps } from './utils.js';
 
+// TODO update so impossible to open > 1 info window at a time: https://developers.google.com/maps/documentation/javascript/infowindows
+// TODO move map to top on small device view
+
 class App extends Component {
   state = {
     locations: [
