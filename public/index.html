@@ -19,21 +19,6 @@
   <!-- React.js div -->
   <div id="root"></div>
 
-  <!-- CREDIT for service worker starter code, 31 October 2018:
-  https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers -->
-  <script type="application/javascript" charset="utf-8">
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function (reg) {
-          console.log('Service worker registration successful with scope: ', reg.scope);
-        }).catch(function (err) {
-          console.log('Oh no! Service worker registration not successful. Error: ', err);
-        });
-      });
-    } else {
-      console.log('Service workers are not supported.');
-    }
-  </script>
 </body>
 
 </html>
