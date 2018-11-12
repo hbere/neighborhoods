@@ -75,7 +75,6 @@ class App extends Component {
         shown: true
       }
     ],
-    nearby: [{ name: 'Place', address: '123 Sesame Street' }],
     markers: [],
     infoWindows: []
   }
@@ -103,38 +102,7 @@ class App extends Component {
       });
 
       this.setMarkers(google);
-    }).then(function () {
-      const CLIENT_ID = 'POHT4NORU4LIMQHFEW0EQUQYDZHUPCFZE1MAOMYOKNEXKM1O';
-      const CLIENT_SECRET = 'NMXS0HD3GSWA0RCEG3H0ASWPT3FJFZA4UOKSB41P0DK4WZMP';
-      const ll = `39.952,-75.164`;
-      const query = 'food';
-      fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20181112&radius=100&limit=3&ll=${ll}&query=${query}`)
-        .then(function (response) {
-          // Code for handling API response
-          return response.json();
-        })
-        .then(function (responseText) {
-          let myRecs = responseText.response.groups[0].items;
-          let tempNearby = [];
-          // console.log(myRecs);
-
-          myRecs.forEach(rec => {
-            let newPlace = { name: rec.venue.name, address: rec.venue.location.address };
-            // console.log(rec.venue.name);
-            // console.log(rec.venue.location.address);
-            tempNearby.push(newPlace);
-          })
-
-          this.setState({ nearby: tempNearby });
-          // console.log(tempNearby);
-          // console.log(this.state.nearby);
-        })
-        .catch(function (error) {
-          // Code for handling errors
-          console.log(error);
-          return error;
-        });
-    });
+    })
   }
 
   // setMarkers()
@@ -242,7 +210,6 @@ class App extends Component {
         <div id='App'>
           <Menu
             locations={this.state.locations}
-            nearby={this.state.nearby}
             onPlaceSelect={(place_id) => {
               this.updateMarker(place_id)
             }}

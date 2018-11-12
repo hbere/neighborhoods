@@ -1,6 +1,52 @@
 import React, { Component } from 'react';
 
 class Menu extends Component {
+    state = {
+        nearby: []
+    }
+
+    componentWillMount() {
+        let tempNearby = [{ name: 'Place', address: '123 Sesame Street' }]
+
+        this.setState({ nearby: tempNearby }, () => {
+            console.log(this.state.nearby, 'nearby');
+        });
+    }
+
+    // componentWillMount()
+    // Functionality: Pulls Foursquare recommendations for menu area
+    componentDidMount() {
+        const CLIENT_ID = 'POHT4NORU4LIMQHFEW0EQUQYDZHUPCFZE1MAOMYOKNEXKM1O';
+        const CLIENT_SECRET = 'NMXS0HD3GSWA0RCEG3H0ASWPT3FJFZA4UOKSB41P0DK4WZMP';
+        const ll = `39.952,-75.164`;
+        const query = 'food';
+        fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20181112&radius=100&limit=3&ll=${ll}&query=${query}`)
+            .then(function (response) {
+                // Code for handling API response
+                return response.json();
+            })
+            .then(function (responseText) {
+                let myRecs = responseText.response.groups[0].items;
+                let tempNearby = [];
+                // console.log(myRecs);
+                myRecs.forEach(rec => {
+                    let newPlace = { name: rec.venue.name, address: rec.venue.location.address };
+                    // console.log(rec.venue.name);
+                    // console.log(rec.venue.location.address);
+                    tempNearby.push(newPlace);
+                })
+            })
+            .then(function (tempNearby) {
+                // console.log(tempNearby);
+                Menu.setState({ nearby: tempNearby }, () => {
+                    console.log(this.state.nearby, 'nearby');
+                });
+            })
+            .catch(function () {
+                // Code for handling errors
+            });
+    }
+
     // Starter Code for render()
     // Credit: Ryan Waite
     // Date: November 11, 2018
@@ -50,12 +96,9 @@ class Menu extends Component {
                 <h2>
                     <label htmlFor="map_menu_nearby">Nearby eats: </label>
                 </h2>
-                <ul role='menu' aria-hidden='false' id='map_menu_list'>
-                    {this.props.nearby.map(loc => (
-                        <li key={loc.name}>
-                            {loc.name}
-                            {loc.address}
-                        </li>
+                <ul role='menu' aria-hidden='false' id='map_menu_nearby'>
+                    {this.state.nearby.map(place => (
+                        <li key={place.name}>{place.name} @ {place.address}</li>
                     ))}
                 </ul>
             </menu>
