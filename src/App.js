@@ -39,7 +39,7 @@ class App extends Component {
         lat: 39.9592686,
         lng: -75.1707164,
         place_id: 'ChIJ9TR6RDPGxokR_VcaNgF3wAQ',
-        place: 'Business Resource & Innovation Center at the Free Library of Philadelphia',
+        place: 'Business Resource & Innovation Center (BRIC)',
         shown: true
       },
       {

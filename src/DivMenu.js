@@ -8,13 +8,22 @@ class Menu extends Component {
     render() {
         return (
             <menu id='map_menu'>
-                <h2>Menu</h2>
-                <label for="search">Search: </label>
-                <input role='search' name='places search' placeholder='Philadelphia City Hall'></input>
+                <h2>Places</h2>
+                <label for="place_select">Choose from the dropdown or list below: </label>
+                <select role='search' aria-hidden='false' id='place_select'>
+                    <option value='(select a place)'>
+                        (select a place)
+                    </option>
+                    {this.props.locations.map(loc => (
+                        <option key={loc.place_id} value={loc.place_id} taborder='0'>
+                            {loc.place}
+                        </option>
+                    ))}
+                </select>
                 <ul role='menu' aria-hidden='false' id='map_menu_list'>
                     {this.props.locations.map(loc => (
                         <li key={loc.place_id}>
-                            {loc.place}
+                            <button class='map_menu_item'>{loc.place}</button>
                         </li>
                     ))}
                 </ul>

@@ -23,6 +23,21 @@ li {
   margin-bottom: 5px;
 }
 
+#map_menu_list {
+  margin-top: 10px;
+}
+
+.map_menu_item {
+  text-align: left;
+  border: none;
+  background-color: white;
+}
+
+.map_menu_item:hover {
+  cursor: pointer;
+  background-color: gray;
+}
+
 #App {
   height: calc(450px + 3em);
   display: grid;
