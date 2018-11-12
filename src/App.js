@@ -5,7 +5,8 @@ import Map from './DivMap.js';
 import { load_google_maps } from './utils.js';
 
 // TODO update so impossible to open > 1 info window at a time: https://developers.google.com/maps/documentation/javascript/infowindows
-// TODO move map to top on small device view
+// TODO fix menu styling on computer-size screen
+// TODO add map markers for Nearby Eats
 
 class App extends Component {
   state = {
@@ -76,7 +77,8 @@ class App extends Component {
       }
     ],
     markers: [],
-    infoWindows: []
+    infoWindows: [],
+    nearby: []
   }
 
   // componentDidMount()
@@ -188,6 +190,8 @@ class App extends Component {
         markersTemp[index].setAnimation(this.google.maps.Animation.BOUNCE);
         setTimeout(function () { markersTemp[index].setAnimation(null); }, 500);
         indexToOpen = index;
+        // Update list of nearby eateries
+        this.updateNearby(loc.lat, loc.lng);
       }
     })
     // Set state
@@ -199,6 +203,38 @@ class App extends Component {
     if (typeof (indexToOpen) !== 'undefined') { // error avoidance
       this.state.infoWindows[indexToOpen].open(this.map, this.state.markers[indexToOpen])
     }
+  }
+
+  // updateNearby()
+  // Functionality: Pulls Foursquare recommendations for menu area
+  updateNearby(lat=39.952, lng=-75.164) {
+    const CLIENT_ID = 'POHT4NORU4LIMQHFEW0EQUQYDZHUPCFZE1MAOMYOKNEXKM1O';
+    const CLIENT_SECRET = 'NMXS0HD3GSWA0RCEG3H0ASWPT3FJFZA4UOKSB41P0DK4WZMP';
+    const ll = `${lat},${lng}`;
+    const query = 'food';
+    fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20181112&radius=100&limit=3&ll=${ll}&query=${query}`)
+      .then((response) => {
+        // Code for handling API response
+        let responseText = response.json();
+        return responseText;
+      })
+      .then((responseText) => {
+        console.log(responseText);
+        let myRecs = responseText.response.groups[0].items;
+        let tempNearby = [];
+        // console.log(myRecs);
+        myRecs.forEach(rec => {
+          let newPlace = { name: rec.venue.name, address: rec.venue.location.address };
+          // console.log(rec.venue.name);
+          // console.log(rec.venue.location.address);
+          tempNearby.push(newPlace);
+        })
+        console.log(tempNearby);
+        this.setState({ nearby: tempNearby });
+      })
+      .catch((error) => {
+        console.log('error: ' + error);
+      })
   }
 
   render() {
@@ -216,6 +252,7 @@ class App extends Component {
           />
           <Menu
             locations={this.state.locations}
+            nearby={this.state.nearby}
             onPlaceSelect={(place_id) => {
               this.updateMarker(place_id)
             }}
