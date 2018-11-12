@@ -9,7 +9,7 @@ class Menu extends Component {
         let tempNearby = [{ name: 'Place', address: '123 Sesame Street' }]
 
         this.setState({ nearby: tempNearby }, () => {
-            console.log(this.state.nearby, 'nearby');
+            // console.log(this.state.nearby, 'nearby');
         });
     }
 
@@ -21,11 +21,13 @@ class Menu extends Component {
         const ll = `39.952,-75.164`;
         const query = 'food';
         fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20181112&radius=100&limit=3&ll=${ll}&query=${query}`)
-            .then(function (response) {
+            .then((response) => {
                 // Code for handling API response
-                return response.json();
+                let responseText = response.json();
+                return responseText;
             })
-            .then(function (responseText) {
+            .then((responseText) => {
+                console.log(responseText);
                 let myRecs = responseText.response.groups[0].items;
                 let tempNearby = [];
                 // console.log(myRecs);
@@ -35,16 +37,12 @@ class Menu extends Component {
                     // console.log(rec.venue.location.address);
                     tempNearby.push(newPlace);
                 })
+                console.log(tempNearby);
+                this.setState({ nearby: tempNearby });
             })
-            .then(function (tempNearby) {
-                // console.log(tempNearby);
-                Menu.setState({ nearby: tempNearby }, () => {
-                    console.log(this.state.nearby, 'nearby');
-                });
+            .catch((error) => {
+                console.log('error: ' + error);
             })
-            .catch(function () {
-                // Code for handling errors
-            });
     }
 
     // Starter Code for render()
