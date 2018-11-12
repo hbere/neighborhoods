@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-// Starter Code for "class Map extends Component"
-// Credit: Ryan Waite
-// Date: November 11, 2018
-// Source URL: https://github.com/ryanwaite28/udacity-fend-p7/blob/master/src/components/MapDiv.js
 class Menu extends Component {
+    // Starter Code for render()
+    // Credit: Ryan Waite
+    // Date: November 11, 2018
+    // Source URL: https://github.com/ryanwaite28/udacity-fend-p7/blob/master/src/components/MapDiv.js
     render() {
         return (
             <menu id='map_menu'>
@@ -14,6 +14,7 @@ class Menu extends Component {
                     id='place_select'
                     onChange={(event) => this.props.onPlaceSelect(event.target.value)}
                     aria-hidden='false'
+                    // value={this.props.locations.filter(loc => loc.selected === true)}
                 >
                     <option value='(select a place)'>
                         (select a place)

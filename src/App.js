@@ -64,11 +64,13 @@ class App extends Component {
         selected: false
       }
     ],
-    markers: []
+    markers: [],
+    infoWindows: []
   }
 
-  // Starter Code for componentDidMount()
-  // Credit: Ryan Waite
+  // componentDidMount()
+  // Functionality: Adds a map to the screen
+  // Credit for starter code: Ryan Waite
   // Date: November 11, 2018
   // Source URL: https://github.com/ryanwaite28/udacity-fend-p7/blob/master/src/App.js
   componentDidMount() {
@@ -92,10 +94,12 @@ class App extends Component {
     })
   }
 
+  // setMarkers()
+  // Functionality: Adds markers to the screen
   setMarkers() {
     let img = 'selected_v4.png'; // Located in the "public" folder
     let markers = this.state.markers;
-    this.infoWindows = [];
+    let infoWindows = this.state.infoWindows
 
     for (let loc of this.state.locations) {
       // Add markers
@@ -115,6 +119,7 @@ class App extends Component {
       let infowindow = new this.google.maps.InfoWindow({
         content: `<p>${loc.place}</p>`
       });
+      infoWindows.push(infowindow);
 
       // Add event listeners
       marker.addListener('click', function () {
@@ -123,25 +128,33 @@ class App extends Component {
     }
   }
 
-  // TODO Write function here for updating marker upon selection on map or menu
+  // updateMarker()
+  // Functionality: Changes icon and opens info window for selected marker, closes any others
   updateMarker(place_id) {
     // console.log(place_id);
     let img = 'selected_v4.png'; // Located in the "public" folder
     let locsTemp = new Array(...this.state.locations);
     let markersTemp = new Array(...this.state.markers);
+    let indexToOpen;
     locsTemp.forEach((loc, index) => {
       if (loc.place_id !== place_id) {
         loc.selected = false;
         markersTemp[index].setIcon('');
+        this.state.infoWindows[index].close(this.map, this.state.markers[index]);
       } else {
         loc.selected = true;
         markersTemp[index].setIcon(img);
+        indexToOpen = index;
       }
     })
     this.setState({
       locations: locsTemp,
       markers: markersTemp
     });
+    // Open info window for chosen place
+    if (typeof (indexToOpen) !== 'undefined') { // error avoidance
+      this.state.infoWindows[indexToOpen].open(this.map, this.state.markers[indexToOpen])
+    }
   }
 
   render() {
