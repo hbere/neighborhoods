@@ -12,56 +12,64 @@ class App extends Component {
         lng: -75.1635996,
         place_id: 'ChIJyb-70KChxokR5YR1l-Nka5s',
         place: 'Philadelphia City Hall',
-        selected: false
+        selected: false,
+        shown: true
       },
       {
         lat: 39.9518832,
         lng: -75.17387149999999,
         place_id: 'ChIJiV8LFDfGxokRUPrVhS6gQZY',
         place: '1 Tippling Place',
-        selected: false
+        selected: false,
+        shown: true
       },
       {
         lat: 39.9507708,
         lng: -75.17392380000001,
         place_id: 'ChIJT73CYzfGxokRa3k_Dda9Uh0',
         place: 'Opera Barber Shop',
-        selected: false
+        selected: false,
+        shown: true
       },
       {
         lat: 39.9655697,
         lng: -75.18096609999999,
         place_id: 'ChIJ_5CoRebFxokR08ApAyF2KIs',
         place: 'Philadelphia Museum of Art',
-        selected: false
+        selected: false,
+        shown: true
       },
       {
         lat: 39.9592686,
         lng: -75.1707164,
         place_id: 'ChIJ9TR6RDPGxokR_VcaNgF3wAQ',
         place: 'Business Resource & Innovation Center (BRIC)',
-        selected: false
+        selected: false,
+        shown: true
       },
       {
         lat: 39.9451908,
         lng: -75.17735160000001,
         place_id: 'ChIJCwROWj_GxokRYnLZpNNC034',
         place: 'City Fitness',
-        selected: false
+        selected: false,
+        shown: true
       },
       {
         lat: 39.9374395,
         lng: -75.17679219999999,
         place_id: 'ChIJz0IHxBTGxokR0KiekZP3Wx8',
         place: 'OCF Coffee House',
-        selected: false
+        selected: false,
+        shown: true
       },
       {
         lat: 39.9468194,
         lng: -75.1650171,
         place_id: 'ChIJfWCzLwnGxokROy6ZBUPSLE4',
         place: 'Kimmel Center',
-        selected: false
+        selected: false,
+        shown: true
       }
     ],
     markers: [],
@@ -134,14 +142,48 @@ class App extends Component {
     })
   }
 
+  // filterMarkers()
+  // Functionality: Shows only the chosen marker
+  filterMarkers(place_id = 'all') {
+    // Declare variables
+    let locsTemp = new Array(...this.state.locations);
+    let markersTemp = new Array(...this.state.markers);
+    // Loop through all locations and markers
+    locsTemp.forEach((loc, index) => {
+      if (place_id === 'all') {
+        loc.shown = true;
+        markersTemp[index].setVisible(true);
+        // Update markers
+        this.updateMarker('');
+      } else {
+        if (loc.place_id !== place_id) {
+          loc.shown = false;
+          markersTemp[index].setVisible(false);
+        } else {
+          loc.shown = true;
+          markersTemp[index].setVisible(true);
+          // Update markers
+          this.updateMarker(loc.place_id);
+        }
+      }
+    })
+    // Set state
+    this.setState({
+      locations: locsTemp,
+      markers: markersTemp
+    });
+  }
+
   // updateMarker()
   // Functionality: Changes icon and opens info window for selected marker, resets any others
   updateMarker(place_id) {
+    // Declare variables
     // console.log(place_id);
     let img = 'selected_v4.png'; // Located in the "public" folder
     let locsTemp = new Array(...this.state.locations);
     let markersTemp = new Array(...this.state.markers);
     let indexToOpen;
+    // Loop through all locations and markers
     locsTemp.forEach((loc, index) => {
       if (loc.place_id !== place_id) {
         loc.selected = false;
@@ -153,6 +195,7 @@ class App extends Component {
         indexToOpen = index;
       }
     })
+    // Set state
     this.setState({
       locations: locsTemp,
       markers: markersTemp
@@ -172,8 +215,11 @@ class App extends Component {
         <div id='App'>
           <Menu
             locations={this.state.locations}
-            onPlaceSelect={(place_id, event) => {
-              this.updateMarker(place_id, event)
+            onPlaceSelect={(place_id) => {
+              this.updateMarker(place_id)
+            }}
+            onPlaceFilter={(place_id) => {
+              this.filterMarkers(place_id)
             }}
           />
           <Map

@@ -14,16 +14,12 @@ class Menu extends Component {
                 </h2>
                 <select role='search'
                     id='place_filter'
-                    onChange={(event) => this.props.onPlaceSelect(event.target.value)}
+                    onChange={(event) => this.props.onPlaceFilter(event.target.value)}
                     aria-hidden='false'
-                    value={this.props.locations.filter(loc => loc.selected === true)}
                     multiple={false}
                 >
-                    <option value='(select a place)'>
-                        (select a place)
-                    </option>
-                    <option value='(reset)'>
-                        (reset)
+                    <option value='all'>
+                        (all locations)
                     </option>
                     {this.props.locations.map(loc => (
                         <option key={loc.place_id} value={loc.place_id} taborder='0'>
@@ -31,12 +27,13 @@ class Menu extends Component {
                         </option>
                     ))}
                 </select>
+
                 {/* LIST */}
                 <h2>
                     <label htmlFor="map_menu_list">Places: </label>
                 </h2>
                 <ul role='menu' aria-hidden='false' id='map_menu_list'>
-                    {this.props.locations.map(loc => (
+                    {this.props.locations.filter(loc => loc.shown === true).map(loc => (
                         <li key={loc.place_id}>
                             <button
                                 value={loc.place_id}
