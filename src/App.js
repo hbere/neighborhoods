@@ -69,7 +69,7 @@ class App extends Component {
   }
 
   // componentDidMount()
-  // Functionality: Adds a map to the screen
+  // Functionality: Adds the map to the screen
   // Credit for starter code: Ryan Waite
   // Date: November 11, 2018
   // Source URL: https://github.com/ryanwaite28/udacity-fend-p7/blob/master/src/App.js
@@ -95,7 +95,7 @@ class App extends Component {
   }
 
   // setMarkers()
-  // Functionality: Adds markers to the screen
+  // Functionality: Adds all markers to the screen
   setMarkers() {
     let img = 'selected_v4.png'; // Located in the "public" folder
     let markers = this.state.markers;
@@ -129,7 +129,7 @@ class App extends Component {
   }
 
   // updateMarker()
-  // Functionality: Changes icon and opens info window for selected marker, closes any others
+  // Functionality: Changes icon and opens info window for selected marker, resets any others
   updateMarker(place_id) {
     // console.log(place_id);
     let img = 'selected_v4.png'; // Located in the "public" folder
