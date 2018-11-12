@@ -134,7 +134,8 @@ class App extends Component {
       // Add event listeners
       marker.addListener('click', function () {
         infowindow.open(this.map, markers[index]);
-        // TODO get this to work so clicking on an icon changes it & bolds the menu text
+        // TODO get MARKER EVENT LISTENER to work so clicking on an icon changes it & bolds the menu text
+
         // this.updateMarker(loc.place_id);
         // console.log(marker);
         // console.log(this.updateMarker);
