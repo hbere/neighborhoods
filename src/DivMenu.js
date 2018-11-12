@@ -8,7 +8,7 @@ class Menu extends Component {
     render() {
         return (
             <menu id='map_menu'>
-                <h2>Places</h2>
+                <h2>Explore the city</h2>
                 <label for="place_select">Choose from the dropdown or list below: </label>
                 <select role='search' aria-hidden='false' id='place_select'>
                     <option value='(select a place)'>
