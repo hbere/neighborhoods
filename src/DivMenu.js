@@ -45,6 +45,19 @@ class Menu extends Component {
                         </li>
                     ))}
                 </ul>
+
+                {/* NEARBY */}
+                <h2>
+                    <label htmlFor="map_menu_nearby">Nearby eats: </label>
+                </h2>
+                <ul role='menu' aria-hidden='false' id='map_menu_list'>
+                    {this.props.nearby.map(loc => (
+                        <li key={loc.name}>
+                            {loc.name}
+                            {loc.address}
+                        </li>
+                    ))}
+                </ul>
             </menu>
         );
     }

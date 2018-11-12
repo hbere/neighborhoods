@@ -26,14 +26,14 @@ class App extends Component {
         selected: false,
         shown: true
       },
-      {
-        lat: 39.9507708,
-        lng: -75.17392380000001,
-        place_id: 'ChIJT73CYzfGxokRa3k_Dda9Uh0',
-        place: 'Opera Barber Shop',
-        selected: false,
-        shown: true
-      },
+      // {
+      //   lat: 39.9507708,
+      //   lng: -75.17392380000001,
+      //   place_id: 'ChIJT73CYzfGxokRa3k_Dda9Uh0',
+      //   place: 'Opera Barber Shop',
+      //   selected: false,
+      //   shown: true
+      // },
       {
         lat: 39.9655697,
         lng: -75.18096609999999,
@@ -50,22 +50,22 @@ class App extends Component {
         selected: false,
         shown: true
       },
-      {
-        lat: 39.9451908,
-        lng: -75.17735160000001,
-        place_id: 'ChIJCwROWj_GxokRYnLZpNNC034',
-        place: 'City Fitness',
-        selected: false,
-        shown: true
-      },
-      {
-        lat: 39.9374395,
-        lng: -75.17679219999999,
-        place_id: 'ChIJz0IHxBTGxokR0KiekZP3Wx8',
-        place: 'OCF Coffee House',
-        selected: false,
-        shown: true
-      },
+      // {
+      //   lat: 39.9451908,
+      //   lng: -75.17735160000001,
+      //   place_id: 'ChIJCwROWj_GxokRYnLZpNNC034',
+      //   place: 'City Fitness',
+      //   selected: false,
+      //   shown: true
+      // },
+      // {
+      //   lat: 39.9374395,
+      //   lng: -75.17679219999999,
+      //   place_id: 'ChIJz0IHxBTGxokR0KiekZP3Wx8',
+      //   place: 'OCF Coffee House',
+      //   selected: false,
+      //   shown: true
+      // },
       {
         lat: 39.9468194,
         lng: -75.1650171,
@@ -75,6 +75,7 @@ class App extends Component {
         shown: true
       }
     ],
+    nearby: [{ name: 'Place', address: '123 Sesame Street' }],
     markers: [],
     infoWindows: []
   }
@@ -102,7 +103,38 @@ class App extends Component {
       });
 
       this.setMarkers(google);
-    })
+    }).then(function () {
+      const CLIENT_ID = 'POHT4NORU4LIMQHFEW0EQUQYDZHUPCFZE1MAOMYOKNEXKM1O';
+      const CLIENT_SECRET = 'NMXS0HD3GSWA0RCEG3H0ASWPT3FJFZA4UOKSB41P0DK4WZMP';
+      const ll = `39.952,-75.164`;
+      const query = 'food';
+      fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20181112&radius=100&limit=3&ll=${ll}&query=${query}`)
+        .then(function (response) {
+          // Code for handling API response
+          return response.json();
+        })
+        .then(function (responseText) {
+          let myRecs = responseText.response.groups[0].items;
+          let tempNearby = [];
+          // console.log(myRecs);
+
+          myRecs.forEach(rec => {
+            let newPlace = { name: rec.venue.name, address: rec.venue.location.address };
+            // console.log(rec.venue.name);
+            // console.log(rec.venue.location.address);
+            tempNearby.push(newPlace);
+          })
+
+          this.setState({ nearby: tempNearby });
+          // console.log(tempNearby);
+          // console.log(this.state.nearby);
+        })
+        .catch(function (error) {
+          // Code for handling errors
+          console.log(error);
+          return error;
+        });
+    });
   }
 
   // setMarkers()
@@ -210,6 +242,7 @@ class App extends Component {
         <div id='App'>
           <Menu
             locations={this.state.locations}
+            nearby={this.state.nearby}
             onPlaceSelect={(place_id) => {
               this.updateMarker(place_id)
             }}

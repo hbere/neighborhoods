@@ -14,28 +14,28 @@ export function load_google_maps() {
             delete window.resolveGoogleMapsPromise;
         }
         // Now, Load the Google Maps API
-        let script = document.createElement("script");
-        let API_KEY = 'AIzaSyB_Yz-oO8-fDiCRNMBAEgGPbN5jVafGTwA';
+        const script = document.createElement("script");
+        const API_KEY = 'AIzaSyB_Yz-oO8-fDiCRNMBAEgGPbN5jVafGTwA';
         script.src = `https://maps.googleapis.com/maps/api/js?libraries=places&key=${API_KEY}&callback=resolveGoogleMapsPromise`;
         script.async = true;
         document.body.appendChild(script);
     });
 }
 
-export function load_google_place(place_id) {
-    return new Promise(function (resolve, reject) {
-        // define the global callback that will run when google maps is loaded
-        window.resolveGooglePlacesPromise = function () {
-            // resolve the google object
-            resolve(window.google);
-            // delete the global callback to tidy up since it is no longer needed
-            delete window.resolveGooglePlacesPromise;
-        }
-        // Now, Load the Google Maps API
-        let script = document.createElement("script");
-        let API_KEY = 'AIzaSyB_Yz-oO8-fDiCRNMBAEgGPbN5jVafGTwA';
-        script.src = `https://maps.googleapis.com/maps/api/place/details/json?${place_id}&key=${API_KEY}`;
-        script.async = true;
-        document.body.appendChild(script);
-    });
-}
+// export function load_google_place(place_id) {
+//     return new Promise(function (resolve, reject) {
+//         // define the global callback that will run when google maps is loaded
+//         window.resolveGooglePlacesPromise = function () {
+//             // resolve the google object
+//             resolve(window.google);
+//             // delete the global callback to tidy up since it is no longer needed
+//             delete window.resolveGooglePlacesPromise;
+//         }
+//         // Now, Load the Google Maps API
+//         const script = document.createElement("script");
+//         const API_KEY = 'AIzaSyB_Yz-oO8-fDiCRNMBAEgGPbN5jVafGTwA';
+//         script.src = `https://maps.googleapis.com/maps/api/place/details/json?${place_id}&key=${API_KEY}`;
+//         script.async = true;
+//         document.body.appendChild(script);
+//     });
+// }
