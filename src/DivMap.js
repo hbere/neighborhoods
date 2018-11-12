@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { load_google_maps } from './utils.js';
 
-// Starter Code for "class Map extends Component"
-// Credit: Ryan Waite
-// Date: November 11, 2018
-// Source URL: https://github.com/ryanwaite28/udacity-fend-p7/blob/master/src/components/MapDiv.js
 class Map extends Component {
 
     // Starter Code for componentDidMount()
@@ -52,6 +48,10 @@ class Map extends Component {
         })
     }
 
+    // Starter Code for render()
+    // Credit: Ryan Waite
+    // Date: November 11, 2018
+    // Source URL: https://github.com/ryanwaite28/udacity-fend-p7/blob/master/src/components/MapDiv.js
     render() {
         return (
             <main>
