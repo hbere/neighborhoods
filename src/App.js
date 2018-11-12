@@ -101,7 +101,7 @@ class App extends Component {
     let markers = this.state.markers;
     let infoWindows = this.state.infoWindows
 
-    for (let loc of this.state.locations) {
+    this.state.locations.forEach((loc, index) => {
       // Add markers
       let marker = new this.google.maps.Marker({
         position: loc,
@@ -117,15 +117,21 @@ class App extends Component {
 
       // Add infoWindows
       let infowindow = new this.google.maps.InfoWindow({
-        content: `<p>${loc.place}</p>`
+        content: `<h3>${loc.place}</h3>` +
+          `<p>PHOTO</p>` +
+          `<p>DESCRIPTION</p>`
       });
       infoWindows.push(infowindow);
 
       // Add event listeners
       marker.addListener('click', function () {
-        infowindow.open(this.map, marker);
+        infowindow.open(this.map, markers[index]);
+        // TODO get this to work so clicking on an icon changes it & bolds the menu text
+        // this.updateMarker(loc.place_id);
+        // console.log(marker);
+        // console.log(this.updateMarker);
       });
-    }
+    })
   }
 
   // updateMarker()

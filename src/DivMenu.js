@@ -8,27 +8,33 @@ class Menu extends Component {
     render() {
         return (
             <menu id='map_menu'>
-                <h2>Explore the city</h2>
-                <label htmlFor="place_select">Choose from the dropdown or list below: </label>
+                {/* FILTER */}
+                <h2>
+                    <label htmlFor="place_filter">Filter: </label>
+                </h2>
                 <select role='search'
-                    id='place_select'
+                    id='place_filter'
                     onChange={(event) => this.props.onPlaceSelect(event.target.value)}
                     aria-hidden='false'
-                    // value={this.props.locations.filter(loc => loc.selected === true)}
+                    value={this.props.locations.filter(loc => loc.selected === true)}
+                    multiple={false}
                 >
                     <option value='(select a place)'>
                         (select a place)
                     </option>
+                    <option value='(reset)'>
+                        (reset)
+                    </option>
                     {this.props.locations.map(loc => (
-                        <option
-                            key={loc.place_id}
-                            value={loc.place_id}
-                            taborder='0'
-                        >
+                        <option key={loc.place_id} value={loc.place_id} taborder='0'>
                             {loc.place}
                         </option>
                     ))}
                 </select>
+                {/* LIST */}
+                <h2>
+                    <label htmlFor="map_menu_list">Places: </label>
+                </h2>
                 <ul role='menu' aria-hidden='false' id='map_menu_list'>
                     {this.props.locations.map(loc => (
                         <li key={loc.place_id}>
@@ -37,7 +43,10 @@ class Menu extends Component {
                                 onClick={(event) => this.props.onPlaceSelect(event.target.value)}
                                 className='map_menu_item'
                             >
-                                {loc.place}
+                                {(loc.selected === true)
+                                    ? <strong>{loc.place}</strong>
+                                    : <div>{loc.place}</div>
+                                }
                             </button>
                         </li>
                     ))}
