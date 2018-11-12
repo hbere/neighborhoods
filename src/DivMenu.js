@@ -40,7 +40,7 @@ class Menu extends Component {
                                 onClick={(event) => this.props.onPlaceSelect(event.target.value)}
                                 className='map_menu_item'
                             >
-                                <div>{loc.place}</div>
+                                {loc.place}
                             </button>
                         </li>
                     ))}
