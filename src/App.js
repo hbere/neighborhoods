@@ -11,6 +11,14 @@ class App extends Component {
   state = {
     locations: [
       {
+        lat: 39.9592686,
+        lng: -75.1707164,
+        place_id: 'ChIJ9TR6RDPGxokR_VcaNgF3wAQ',
+        place: 'Business Resource & Innovation Center (BRIC)',
+        selected: false,
+        shown: true
+      },
+      {
         lat: 39.9523789,
         lng: -75.1635996,
         place_id: 'ChIJyb-70KChxokR5YR1l-Nka5s',
@@ -39,14 +47,6 @@ class App extends Component {
         lng: -75.18096609999999,
         place_id: 'ChIJ_5CoRebFxokR08ApAyF2KIs',
         place: 'Philadelphia Museum of Art',
-        selected: false,
-        shown: true
-      },
-      {
-        lat: 39.9592686,
-        lng: -75.1707164,
-        place_id: 'ChIJ9TR6RDPGxokR_VcaNgF3wAQ',
-        place: 'Business Resource & Innovation Center (BRIC)',
         selected: false,
         shown: true
       },
@@ -123,8 +123,8 @@ class App extends Component {
       // Add infoWindows
       let infowindow = new this.google.maps.InfoWindow({
         content: `<h3>${loc.place}</h3>` +
-          `<p>Photo coming soon</p>` +
-          `<p>Description coming soon</p>`
+          `<p>Latitude: ${loc.lat}</p>` +
+          `<p>Longitude: ${loc.lng}</p>`
       });
       infoWindows.push(infowindow);
 
@@ -208,6 +208,12 @@ class App extends Component {
           <h1>Philadelphia Places</h1>
         </header>
         <div id='App'>
+          <Map
+            locations={this.state.locations}
+            onPlaceSelect={(place_id) => {
+              this.updateMarker(place_id)
+            }}
+          />
           <Menu
             locations={this.state.locations}
             onPlaceSelect={(place_id) => {
@@ -215,12 +221,6 @@ class App extends Component {
             }}
             onPlaceFilter={(place_id) => {
               this.filterMarkers(place_id)
-            }}
-          />
-          <Map
-            locations={this.state.locations}
-            onPlaceSelect={(place_id) => {
-              this.updateMarker(place_id)
             }}
           />
         </div>

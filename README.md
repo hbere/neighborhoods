@@ -21,6 +21,7 @@ This application uses several web services and software libraries, including:
 
 * [React.js](https://reactjs.org/)
 * [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial)
+* [FourSquare Places API](https://developer.foursquare.com/docs/api)
 
 ## Acknowledgements
 
