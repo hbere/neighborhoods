@@ -185,7 +185,7 @@ class App extends Component {
     let indexToOpen;
     // Loop through all locations and markers
     locsTemp.forEach((loc, index) => {
-      if (loc.place_id !== place_id) {
+      if (loc.place_id !== place_id || (loc.place_id === place_id && loc.selected === true)) {
         loc.selected = false;
         markersTemp[index].setIcon('');
         this.state.infoWindows[index].close(this.map, this.state.markers[index]);
