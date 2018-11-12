@@ -7,7 +7,7 @@ html, body {
 header {
   height: 3em;
   text-align: center;
-  background-color: aquamarine;
+  background-color: rgb(127, 208, 255);
 }
 
 h1, h2 {
@@ -16,7 +16,7 @@ h1, h2 {
 
 ul {
   padding-left: 15px;
-  font-size: small;
+  font-size: .5em;
 }
 
 li {
