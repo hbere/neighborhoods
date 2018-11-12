@@ -98,14 +98,13 @@ class App extends Component {
         center: { lat: this.state.locations[0].lat, lng: this.state.locations[0].lng }
       });
 
-      this.setMarkers();
+      this.setMarkers(google);
     })
   }
 
   // setMarkers()
   // Functionality: Adds all markers to the screen
-  setMarkers() {
-    let img = 'selected_v4.png'; // Located in the "public" folder
+  setMarkers(google) {
     let markers = this.state.markers;
     let infoWindows = this.state.infoWindows
 
@@ -116,11 +115,6 @@ class App extends Component {
         map: this.map,
         title: loc.place
       });
-      if (loc.selected === false) {
-        marker.setIcon('');
-      } else {
-        marker.setIcon(img);
-      }
       markers.push(marker);
 
       // Add infoWindows
@@ -134,11 +128,8 @@ class App extends Component {
       // Add event listeners
       marker.addListener('click', function () {
         infowindow.open(this.map, markers[index]);
-        // TODO get MARKER EVENT LISTENER to work so clicking on an icon changes it & bolds the menu text
-
-        // this.updateMarker(loc.place_id);
-        // console.log(marker);
-        // console.log(this.updateMarker);
+        markers[index].setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function () { markers[index].setAnimation(null); }, 500);
       });
     })
   }
@@ -180,7 +171,6 @@ class App extends Component {
   updateMarker(place_id) {
     // Declare variables
     // console.log(place_id);
-    let img = 'selected_v4.png'; // Located in the "public" folder
     let locsTemp = new Array(...this.state.locations);
     let markersTemp = new Array(...this.state.markers);
     let indexToOpen;
@@ -192,7 +182,8 @@ class App extends Component {
         this.state.infoWindows[index].close(this.map, this.state.markers[index]);
       } else {
         loc.selected = true;
-        markersTemp[index].setIcon(img);
+        markersTemp[index].setAnimation(this.google.maps.Animation.BOUNCE);
+        setTimeout(function () { markersTemp[index].setAnimation(null); }, 500);
         indexToOpen = index;
       }
     })

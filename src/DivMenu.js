@@ -40,10 +40,7 @@ class Menu extends Component {
                                 onClick={(event) => this.props.onPlaceSelect(event.target.value)}
                                 className='map_menu_item'
                             >
-                                {(loc.selected === true)
-                                    ? <strong>{loc.place}</strong>
-                                    : <div>{loc.place}</div>
-                                }
+                                <div>{loc.place}</div>
                             </button>
                         </li>
                     ))}
