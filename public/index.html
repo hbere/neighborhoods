@@ -15,10 +15,13 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
+
+  <!-- React.js div -->
   <div id="root"></div>
+
+  <!-- CREDIT for service worker starter code, 31 October 2018:
+  https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers -->
   <script type="application/javascript" charset="utf-8">
-    // CREDIT for service worker starter code, 31 October 2018:
-    // https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function (reg) {
