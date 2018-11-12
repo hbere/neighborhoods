@@ -123,8 +123,8 @@ class App extends Component {
       // Add infoWindows
       let infowindow = new this.google.maps.InfoWindow({
         content: `<h3>${loc.place}</h3>` +
-          `<p>PHOTO</p>` +
-          `<p>DESCRIPTION</p>`
+          `<p>Photo coming soon</p>` +
+          `<p>Description coming soon</p>`
       });
       infoWindows.push(infowindow);
 
