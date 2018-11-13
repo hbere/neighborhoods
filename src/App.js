@@ -8,6 +8,8 @@ import { load_google_maps } from './utils.js';
 // TODO fix menu styling on computer-size screen
 // TODO add map markers for Nearby Eats
 // TODO add Nearby Eats update when a map marker is selected
+// TODO consider comment for src/DivMenu.js 'If you want, you can also insert export before the component declaration, then proceed to import the component as usual in another file. There is more than one way to do this, if you want to learn more about exporting I recommend you check out this article: https://medium.com/@thejasonfile/a-simple-intro-to-javascript-imports-and-exports-389dd53c3fac ✔️'
+// TODO read up on this: http://busypeoples.github.io/post/react-component-lifecycle/
 
 class App extends Component {
   state = {
