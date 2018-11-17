@@ -9,11 +9,12 @@ Welcome to my Philadelphia Places web application. It includes a filterable map 
 ## Quick Start Guide (assumes Linux or Unix)
 
 1. Download or clone this project to your computer
-2. Open a BASH shell
-3. Navigate (`cd`) to the directory
-4. Run `npm install` (first time only)
-5. Run `npm start`
-6. You should now be able to interact with the application on https://localhost:3000/
+2. Update the [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/tutorial) API_KEY value located in utils.js and the [FourSquare Places API](https://developer.foursquare.com/docs/api) CLIENT_ID and CLIENT_SECRET values located in App.js
+3. Open a BASH shell
+4. Navigate (`cd`) to the directory
+5. Run `npm install` (first time only)
+6. Run `npm start`
+7. You should now be able to interact with the application on https://localhost:3000/
 
 ## Software Tools
 
