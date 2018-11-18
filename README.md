@@ -6,7 +6,11 @@ Looking for a new place to visit in Philadelphia, Pennsylvania? You may have fou
 
 Welcome to my Philadelphia Places web application. It includes a filterable map of 8 notable Philadelphia locations, including several that are "off the beaten path."
 
-## Quick Start Guide (assumes Linux or Unix)
+## Quick Start Guide
+
+Try the app on [Heroku](https://neighborhoods-test.herokuapp.com/).
+
+## Quick Local Install Guide (assumes Linux or Unix)
 
 1. Download or clone this project to your computer
 2. Open a BASH shell
