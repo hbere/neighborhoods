@@ -15,7 +15,7 @@ export function load_google_maps() {
         }
         // Now, Load the Google Maps API
         const script = document.createElement("script");
-        const API_KEY = 'AIzaSyB_Yz-oO8-fDiCRNMBAEgGPbN5jVafGTwA';
+        const API_KEY = 'AIzaSyDm55PqbV0AJuGI3io8tC8BbilnOQT2Wq8';
         script.src = `https://maps.googleapis.com/maps/api/js?libraries=places&key=${API_KEY}&callback=resolveGoogleMapsPromise`;
         script.async = true;
         document.body.appendChild(script);
@@ -33,7 +33,7 @@ export function load_google_maps() {
 //         }
 //         // Now, Load the Google Maps API
 //         const script = document.createElement("script");
-//         const API_KEY = 'AIzaSyB_Yz-oO8-fDiCRNMBAEgGPbN5jVafGTwA';
+//         const API_KEY = 'MY_API_KEY';
 //         script.src = `https://maps.googleapis.com/maps/api/place/details/json?${place_id}&key=${API_KEY}`;
 //         script.async = true;
 //         document.body.appendChild(script);

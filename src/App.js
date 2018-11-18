@@ -212,7 +212,7 @@ class App extends Component {
   // Functionality: Pulls Foursquare recommendations for menu area
   updateNearby(lat=39.952, lng=-75.164) {
     const CLIENT_ID = 'POHT4NORU4LIMQHFEW0EQUQYDZHUPCFZE1MAOMYOKNEXKM1O';
-    const CLIENT_SECRET = 'NMXS0HD3GSWA0RCEG3H0ASWPT3FJFZA4UOKSB41P0DK4WZMP';
+    const CLIENT_SECRET = 'TKZ3D1PXUHNB5WE1DOKVE1FARHKP0NE1OCVMDROJGNDDNQIK';
     const ll = `${lat},${lng}`;
     const query = 'food';
     fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=20181112&radius=100&limit=3&ll=${ll}&query=${query}`)
